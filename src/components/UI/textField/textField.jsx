@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './s_textField.scss'
 
-const TextField = ({placeholder}) => {
+const TextField = ({ placeholder, setText }) => {
   const [valueTextarea, setValueTextarea] = useState()
+
+  useEffect(() => {
+    setText(valueTextarea)
+  }, [valueTextarea, setText])
 
   return (
     <div>
