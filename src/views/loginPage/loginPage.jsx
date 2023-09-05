@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/UI/button/button'
 import InputText from '../../components/UI/inputText/inputText'
 import './s_loginPade.scss'
@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState(localStorage.getItem('email') ? localStorage.getItem('email') : '')
   const [password, setPassword] = useState('')
   const [errorPassword, setErrorPassword] = useState(false)
+  const navigate = useNavigate()
 
   const submit = async (event) => {
     localStorage.setItem('email', email);
@@ -17,7 +18,7 @@ const LoginPage = () => {
     try {
       let loginResponse = await signInUser(email, password);
       startSession(loginResponse.user);
-      // navigate("/user");
+      navigate('/')
     } catch (error) {
       console.error(error.message);
       console.log(error.message);

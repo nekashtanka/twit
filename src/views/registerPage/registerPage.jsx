@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Button from '../../components/UI/button/button'
 import InputText from '../../components/UI/inputText/inputText'
 import './s_registerPage.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { createUser } from './../../API/bd/fireBase'
 import { startSession } from './../../API/bd/session'
 
@@ -13,6 +13,7 @@ const RegisterPage = () => {
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorLenghtPassword, setErrorLenghtPassword] = useState(false)
   const [errorRegister, setErrorRegister] = useState(false)
+  const navigate = useNavigate()
 
   const submit = async (event) => {
     localStorage.setItem('email', email);
@@ -21,6 +22,7 @@ const RegisterPage = () => {
     try {
       let registerResponse = await createUser(email, password);
       startSession(registerResponse.user);
+      navigate('/')
     } catch (error) {
       console.log(error.message);
       error.message === 'Firebase: Error (auth/email-already-in-use).' ? setErrorRegister(true) : setErrorRegister(false)

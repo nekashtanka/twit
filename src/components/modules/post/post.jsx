@@ -1,9 +1,12 @@
-import './s_post.jsx'
+import './s_post.scss'
 
-const Post = ({text}) => {
+const Post = ({ text, user }) => {
   return (
-    <div>
+    <div className='wrapper_post'>
+      <p>{user}</p>
       <p>{text}</p>
     </div>
   )
 }
+
+export default Post
