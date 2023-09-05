@@ -1,0 +1,15 @@
+.wrapper_input_text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  input,
+  label {
+    margin: 10px;
+  }
+  input {
+    padding: 5px 10px;
+    width: calc(100% - 42px);
+    font-size: large;
+  }
+}

@@ -1,0 +1,21 @@
+.wrapper_register {
+  border: 1px solid var(--base-border-color);
+  width: 60%;
+  margin: 10% auto;
+  padding: 20px;
+
+  h2 {
+    margin: 20px;
+  }
+
+  form {
+    width: 60%;
+    margin: auto;
+  }
+
+  .error {
+    color: red;
+    margin: 10px;
+    text-align: start;
+  }
+}
