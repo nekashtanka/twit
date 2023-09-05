@@ -14,20 +14,15 @@ const Header = () => {
   }
 
   useEffect(() => {
-    if (!isLoggedIn()) {
-      navigate("/login");
-    }
-
     let session = getSession();
     setEmail(session.email)
-
   }, [navigate]);
 
   return (
     <div className='wrapper_header'>
       <h1>Logo</h1>
       <div className='wrapper_profile'>
-        <p>Профиль</p>
+       
         {!isLoggedIn() ? <></> : <>
           <p>{email}</p>
           <Button text='Выйти' onClick={() => onLogout()} />

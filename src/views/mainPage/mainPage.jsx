@@ -6,10 +6,12 @@ import { isLoggedIn } from "./../../API/bd/session";
 import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../../API/bd/fireBase';
 import { getAuth } from 'firebase/auth';
+import Button from '../../components/UI/button/button';
 
 const MainPage = () => {
   const navigate = useNavigate()
   const [postsData, setPostsData] = useState([])
+  const [newPost, setNewPost] = useState(false)
 
   async function fetchData() {
     setPostsData(await getPosts())
@@ -19,14 +21,16 @@ const MainPage = () => {
     if (!isLoggedIn()) {
       navigate("/login");
     }
+    
+    // eslint-disable-next-line
     const auth = getAuth();
 
     fetchData()
-  }, [navigate]);
+  }, [navigate, newPost]);
 
   return (
     <div className='wrapper_main_page'>
-      <NewPost />
+      {newPost ? <NewPost setNewPost={setNewPost} index={postsData.length}/> : <Button text='Новый пост' onClick={() => setNewPost(true)} />}
       {postsData.map(elem => {
         return (
           <div key={elem.id}>

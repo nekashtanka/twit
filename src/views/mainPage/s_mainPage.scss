@@ -2,3 +2,9 @@
   margin: 20px auto;
   width: 70%;
 }
+
+@media (max-width:750px)  {
+  .wrapper_main_page {
+    width: 100%;
+  }
+}

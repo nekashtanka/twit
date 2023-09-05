@@ -28,7 +28,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = getFirestore(app);// eslint-disable-next-line
 const auth = getAuth();
 
 export const createUser = async (email, password) => {
@@ -39,37 +39,29 @@ export const signInUser = async (email, password) => {
   return signInWithEmailAndPassword(getAuth(app), email, password);
 }
 
-export async function getPosts() {
+export async function getPosts() { // eslint-disable-next-line
+  const auth = getAuth();
   const querySnapshot = await getDocs(collection(db, "posts"));
   const posts = [];
-  querySnapshot.forEach((doc) => {
+  querySnapshot.forEach((doc, index) => {
     posts.push({
-      id: doc.id,
+      id: doc.data().index,
       data: doc.data(),
     });
   });
+  posts.sort((a, b) => b.id - a.id);
   return posts;
 }
 
-export async function createPost(text, user) {
-  try {
-      const docRef = await addDoc(collection(db, "posts"), {
-        user: user,
-        text: text,
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+export async function createPost(text, user, index) { // eslint-disable-next-line
+  const auth = getAuth();
+  try { // eslint-disable-next-line
+    const docRef = await addDoc(collection(db, "posts"), {
+      user: user,
+      index: index,
+      text: text,
+    });
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 }
-
-
-
-
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     console.log('Пользователь аутентифицирован, можно выполнять запросы к Firestore')
-//   } else {
-//     console.log('Пользователь не аутентифицирован, требуется аутентификация')
-//   }
-// });

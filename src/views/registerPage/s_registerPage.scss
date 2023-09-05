@@ -23,3 +23,15 @@
     padding: 20px;
   }
 }
+
+@media (max-width:750px)  {
+  .wrapper_register {
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 20px 0;
+    form {
+      width: auto
+    }
+  }
+}
