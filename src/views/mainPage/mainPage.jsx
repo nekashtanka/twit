@@ -1,4 +1,4 @@
-import NewPost from '../../modules/newPost/newPost';
+import NewPost from './../../components/modules/newPost/newPost';
 import './s_mainPage.scss';
 
 const MainPage = () => {
